@@ -1,0 +1,24 @@
+from typing import List
+import heapq
+    
+def k_smallest_element(nums: List, k:int)->int:
+    heap=[]
+    for x in range(len(nums)-1,-1,-1):
+        heapq.heappush(heap,-nums[x])
+        if len(heap)>k:
+            heapq.heappop(heap)
+    return -heap[0]
+
+print(k_smallest_element([1,2,77,-5,44],2))
+
+def k_smallest_element_heapify(nums: List, k:int)->int:
+    heapq.heapify(nums)
+    return heapq.nsmallest(2,nums)[k-1]
+
+print(k_smallest_element_heapify([1,2,77,-5,44],2))
+
+def k_smallest_element_sorted(nums: List, k:int)->int:
+    nums.sort()
+    return nums[k-1]
+
+print(k_smallest_element_sorted([1,2,77,-5,44],2))
